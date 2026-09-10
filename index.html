@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Krypt | Final Timed Challenge – Engineers' Day</title>
+  <meta name="description" content="12 questions. 1 minute 30 seconds. Zero mistakes. The ultimate fast-paced engineering challenge for B.Tech students." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<!-- ══ START SCREEN ══ -->
+<section id="start-screen" class="screen active">
+  <div class="brand-mark" aria-label="By Krypt"><span>by</span><strong>KRYPT</strong></div>
+  <div class="inner">
+    <div class="badge"><span class="dot"></span>Engineers' Day Challenge 2026</div>
+    <h1 class="main-title">FINAL TIMED<br>CHALLENGE</h1>
+    <p class="sub-title">12 Questions &nbsp;&bull;&nbsp; 1 Minute 30 Seconds &nbsp;&bull;&nbsp; Zero Mistakes</p>
+    <p class="tagline">&ldquo;Think fast. One wrong answer resets the challenge.&rdquo;</p>
+    <div class="info-cards">
+      <div class="info-card card-blue">
+        <div class="ic-value">12</div>
+        <div class="ic-label">Questions</div>
+      </div>
+      <div class="info-card card-orange">
+        <div class="ic-value">90s</div>
+        <div class="ic-label">Total Time</div>
+      </div>
+      <div class="info-card card-red">
+        <div class="ic-value">0</div>
+        <div class="ic-label">Mistakes Allowed</div>
+      </div>
+    </div>
+    <button class="start-btn" id="start-btn" onclick="startCountdown()">
+      <span class="btn-icon">&#9889;</span>
+      <span class="btn-text">Start Challenge</span>
+    </button>
+  </div>
+</section>
+
+<!-- ══ QUIZ SCREEN ══ -->
+<section id="quiz-screen" class="screen">
+  <div class="quiz-wrapper">
+    <!-- Header -->
+    <div class="quiz-header">
+      <div class="quiz-title-wrap">
+        <h1>Final Timed Challenge</h1>
+        <p>Attempt <span class="attempt-num" id="attempt-display">01</span></p>
+      </div>
+      <div class="timer-wrap">
+        <div class="timer-label">Time Remaining</div>
+        <div class="timer-display" id="timer-display">01:30</div>
+        <div class="timer-urgency-bar"><div class="timer-urgency-fill" id="urgency-fill" style="width:100%"></div></div>
+      </div>
+    </div>
+    <!-- Progress -->
+    <div class="progress-section">
+      <div class="progress-header">
+        <div class="progress-label">Progress</div>
+        <div class="progress-counter">Question <span id="q-counter">1</span> / 12</div>
+      </div>
+      <div class="progress-bar-track"><div class="progress-bar-fill" id="progress-bar" style="width:0%"></div></div>
+      <div class="step-dots" id="step-dots"></div>
+    </div>
+    <!-- Question Card -->
+    <div class="question-card" id="question-card">
+      <div class="q-meta">
+        <span class="q-number" id="q-number">QUESTION 01</span>
+        <span class="q-category" id="q-category">Logical Reasoning</span>
+      </div>
+      <div class="question-text" id="question-text">Loading...</div>
+      <div class="options-grid" id="options-grid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COUNTDOWN OVERLAY ══ -->
+<div id="countdown-overlay">
+  <div class="countdown-num" id="countdown-num">3</div>
+  <div class="countdown-label" id="countdown-label">Get Ready</div>
+</div>
+
+<!-- ══ FAIL OVERLAY ══ -->
+<div id="fail-overlay" class="overlay-screen">
+  <div class="overlay-card">
+    <span class="overlay-icon" id="fail-icon">&#10060;</span>
+    <h2 class="overlay-title" id="fail-title">INCORRECT ANSWER</h2>
+    <p class="overlay-desc" id="fail-desc">Attempt failed. Generating a new set of 12 questions.</p>
+    <div class="overlay-stats">
+      <div class="stat-item"><div class="stat-value" id="fail-q-reached">-</div><div class="stat-label">Q Reached</div></div>
+      <div class="stat-item"><div class="stat-value" id="fail-time-left">-</div><div class="stat-label">Time Left</div></div>
+      <div class="stat-item"><div class="stat-value" id="fail-attempts">-</div><div class="stat-label">Attempts</div></div>
+    </div>
+    <button class="overlay-btn fail-btn" id="new-attempt-btn" onclick="resetAndRestart()">&#128260;&nbsp; New Attempt</button>
+  </div>
+</div>
+
+<!-- ══ SUCCESS OVERLAY ══ -->
+<div id="success-overlay" class="overlay-screen">
+  <div class="overlay-card">
+    <span class="overlay-icon">&#127881;</span>
+    <h2 class="overlay-title success-title">CHALLENGE COMPLETED!</h2>
+    <p class="overlay-desc">Perfect 12/12 &mdash; You nailed it without a single mistake!</p>
+    <div class="overlay-stats">
+      <div class="stat-item"><div class="stat-value" id="success-score">12/12</div><div class="stat-label">Score</div></div>
+      <div class="stat-item"><div class="stat-value" id="success-time">00:00</div><div class="stat-label">Time Left</div></div>
+      <div class="stat-item"><div class="stat-value" id="success-attempts">1</div><div class="stat-label">Attempts</div></div>
+    </div>
+    <button class="overlay-btn success-btn" onclick="handleContinue()">&#128640;&nbsp; Continue to Next Stage</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
